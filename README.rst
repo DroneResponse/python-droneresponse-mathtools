@@ -30,7 +30,7 @@ Installation
 
 ::
 
-    pip install droneresponse-mathtools
+    pip install https://github.com/DroneResponse/python-droneresponse-mathtools
 
 You can also install the in-development version with::
 
@@ -100,3 +100,8 @@ Set up ``pre-commit``
 
     cd python-droneresponse-mathtools
     pre-commit install
+
+Set up ``bumpversion``
+::
+
+    pip install bumpversion
