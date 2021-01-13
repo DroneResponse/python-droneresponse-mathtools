@@ -3,4 +3,4 @@ from droneresponse_mathtools import main
 
 
 def test_main():
-    pass
+    assert main is not None
