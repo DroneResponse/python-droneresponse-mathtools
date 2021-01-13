@@ -21,7 +21,7 @@ Overview
 
 .. end-badges
 
-A collectio
+Math tools
 
 * Free software: MIT license
 
@@ -75,17 +75,28 @@ Note, to combine the coverage data from all the tox environments run:
 
 Development Setup
 -----------------
-A complete development environment isn't necessary unless for most people. This setup lets
+A complete development environment isn't necessary most of the time.
+This setup lets test with multiple python interpreters.
+It also lets you use the pre-commit to automatically clean the source code before commits.
 
-To set up a complete development environment on Ubuntu, install python3.6, python3.7, python3.8, python3.9
+To set up a complete development environment on Ubuntu, install python3.6, python3.7, python3.8, python3.9, pip and venv.
 ::
 
     sudo apt update
-    sudo apt install --yes software-properties-common python3
+    sudo apt install --yes software-properties-common python3 python3-pip python3-venv
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install --yes python3.6 python3.7 python3.9
 
-Also install pypy3.7. by downloading the lastest version from
-<https://www.pypy.org/download.html>
-Then extract it and add it's executables to your ``PATH`` variable.
+Also install pypy3.7. by downloading the lastest version from `pypy.org <https://www.pypy.org/download.html>`_.
+Then extract the archive and add it's bin directory to your ``PATH`` variable.
 
+Install ``flake8`` and ``pre-commit`` with
+::
+
+    pip install pre-commit flake8
+
+Set up ``pre-commit``
+::
+
+    cd python-droneresponse-mathtools
+    pre-commit install
