@@ -45,8 +45,9 @@ To use the project:
 
 .. code-block:: python
 
-    import droneresponse_mathtools
-    droneresponse_mathtools.longest()
+    from droneresponse_mathtools import Lla
+    white_field = Lla(41.714911, -86.242250, 0)
+    pendle_rd = white_field.move_ned(106, 0, 0)
 
 
 Development
