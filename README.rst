@@ -30,8 +30,9 @@ Installation
 
 ::
 
-    pip install git+https://github.com/DroneResponse/python-droneresponse-mathtools#egg=droneresponse-mathtools
+    pip install git+ssh://git@github.com/DroneResponse/python-droneresponse-mathtools#egg=droneresponse-mathtools
 
+You migh see a harmless error: ``invalid command 'bdist_wheel'``.
 
 Documentation
 =============
@@ -80,7 +81,7 @@ To set up a complete development environment on Ubuntu, install python3.6, pytho
 ::
 
     sudo apt update
-    sudo apt install --yes software-properties-common python3 python3-pip python3-venv
+    sudo apt install --yes software-properties-common python3 python3-pip python3-venv python3-wheel python3-dev
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install --yes python3.6 python3.7 python3.9
 
