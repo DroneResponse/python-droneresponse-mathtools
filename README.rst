@@ -15,13 +15,13 @@ Overview
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/DroneResponse/python-droneresponse-mathtools/v0.0.0.svg
     :alt: Commits since latest release
-    :target: https://github.com/DroneResponse/python-droneresponse-mathtools/compare/v0.0.0...master
+    :target: https://github.com/DroneResponse/python-droneresponse-mathtools/compare/v0.0.0...main
 
 
 
 .. end-badges
 
-Math tools
+Math tools for DroneResponse.
 
 * Free software: MIT license
 
@@ -30,11 +30,7 @@ Installation
 
 ::
 
-    pip install https://github.com/DroneResponse/python-droneresponse-mathtools
-
-You can also install the in-development version with::
-
-    pip install https://github.com/DroneResponse/python-droneresponse-mathtools/archive/master.zip
+    pip install git+https://github.com/DroneResponse/python-droneresponse-mathtools#egg=droneresponse-mathtools
 
 
 Documentation
@@ -77,8 +73,8 @@ Note, to combine the coverage data from all the tox environments run:
 Development Setup
 -----------------
 A complete development environment isn't necessary most of the time.
-This setup lets test with multiple python interpreters.
-It also lets you use the pre-commit to automatically clean the source code before commits.
+This setup lets you test with multiple python interpreters.
+It also lets you use the pre-commit tool to automatically clean the source code before commits.
 
 To set up a complete development environment on Ubuntu, install python3.6, python3.7, python3.8, python3.9, pip and venv.
 ::
