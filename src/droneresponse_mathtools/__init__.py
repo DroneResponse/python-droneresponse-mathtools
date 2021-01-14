@@ -96,7 +96,7 @@ class Position(object):
 
 class Lla(Position):
     def __init__(self, latitude, longitude, altitude):
-        self.lla = np.array([latitude, longitude, altitude]).astype(np.float64)
+        self.lla = np.array([latitude, longitude, altitude], dtype=np.float64)
 
     def get_latitude(self, as_rad=False):
         lat = self.lla[0]
@@ -143,7 +143,7 @@ class Lla(Position):
 
 class Nvector(Position):
     def __init__(self, x, y, z, depth):
-        self.n_EB_E = np.array([x, y, z]).astype(np.float64).reshape(-1, 1)
+        self.n_EB_E = np.array([x, y, z], dtype=np.float64).reshape(-1, 1)
         self._depth = depth
 
     def get_x(self):
@@ -188,7 +188,7 @@ class Nvector(Position):
 
 class Pvector(Position):
     def __init__(self, x, y, z):
-        self.p_EB_E = np.array([x, y, z]).astype(np.float64).reshape(-1, 1)
+        self.p_EB_E = np.array([x, y, z], dtype=np.float64).reshape(-1, 1)
 
     def __sub__(self, other):
         return self.p_EB_E.ravel() - other.p_EB_E.ravel()
