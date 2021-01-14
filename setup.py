@@ -71,7 +71,9 @@ setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-        # eg: 'aspectlib==1.1.1', 'six>=1.7',
+        'numpy>=1.18',
+        'nvector>=0.7',
+        # 'geographiclib>=1.50'
     ],
     extras_require={
         # eg:
