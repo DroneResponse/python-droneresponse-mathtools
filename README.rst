@@ -87,9 +87,6 @@ To set up a complete development environment on Ubuntu, install python3.6, pytho
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt install --yes python3.6 python3.7 python3.9
 
-Also install pypy3.7. by downloading the lastest version from `pypy.org <https://www.pypy.org/download.html>`_.
-Then extract the archive and add it's bin directory to your ``PATH`` variable.
-
 Install ``flake8`` and ``pre-commit`` with
 ::
 
