@@ -28,21 +28,33 @@ class TestNVector(unittest.TestCase):
         depth = -100.0
 
         self.assertEqual(x, nvec.get_x())
+        self.assertEqual(x, nvec.x)
+
         self.assertEqual(y, nvec.get_y())
+        self.assertEqual(y, nvec.y)
+
         self.assertEqual(z, nvec.get_z())
+        self.assertEqual(z, nvec.z)
+
         self.assertEqual(depth, nvec.get_depth())
+        self.assertEqual(depth, nvec.depth)
 
 
 class TestPVector(unittest.TestCase):
     def test_getters(self):
-        nvec = mathtools.Pvector(0.0, 6.37813700E06, 0.0)
+        pvec = mathtools.Pvector(0.0, 6.37813700E06, 0.0)
         x = 0.0
         y = 6.37813700E06
         z = 0.0
 
-        self.assertEqual(x, nvec.get_x())
-        self.assertEqual(y, nvec.get_y())
-        self.assertEqual(z, nvec.get_z())
+        self.assertEqual(x, pvec.get_x())
+        self.assertEqual(x, pvec.x)
+
+        self.assertEqual(y, pvec.get_y())
+        self.assertEqual(y, pvec.y)
+
+        self.assertEqual(z, pvec.get_z())
+        self.assertEqual(z, pvec.z)
 
 
 class TestLLA(unittest.TestCase):
@@ -55,10 +67,19 @@ class TestLLA(unittest.TestCase):
         alt = 0
 
         self.assertEqual(lat_deg, lla.get_latitude())
+        self.assertEqual(lat_deg, lla.latitude)
+        self.assertEqual(lat_deg, lla.lat)
+
         self.assertEqual(lon_deg, lla.get_longitude())
+        self.assertEqual(lon_deg, lla.longitude)
+        self.assertEqual(lon_deg, lla.lon)
+
+        self.assertEqual(alt, lla.get_altitude())
+        self.assertEqual(alt, lla.altitude)
+        self.assertEqual(alt, lla.alt)
+
         self.assertEqual(lat_rad, lla.get_latitude(as_rad=True))
         self.assertEqual(lon_rad, lla.get_longitude(as_rad=True))
-        self.assertEqual(alt, lla.get_altitude())
 
 
 class TestDistance(unittest.TestCase):

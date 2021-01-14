@@ -116,8 +116,11 @@ class Lla(Position):
         return self.lla[-1]
 
     latitude = property(get_latitude)
+    lat = property(get_latitude)
     longitude = property(get_longitude)
+    lon = property(get_longitude)
     altitude = property(get_altitude)
+    alt = property(get_altitude)
 
     def to_nvector(self):
         lat = self.get_latitude(as_rad=True)
@@ -141,7 +144,7 @@ class Lla(Position):
 class Nvector(Position):
     def __init__(self, x, y, z, depth):
         self.n_EB_E = np.array([x, y, z]).astype(np.float64).reshape(-1, 1)
-        self.depth = depth
+        self._depth = depth
 
     def get_x(self):
         return self.n_EB_E[0, 0]
@@ -156,7 +159,13 @@ class Nvector(Position):
         return self.n_EB_E.ravel().reshape(shape)
 
     def get_depth(self):
-        return self.depth
+        return self._depth
+
+    x = property(get_x)
+    y = property(get_y)
+    z = property(get_z)
+    xyz = property(get_xyz)
+    depth = property(get_depth)
 
     def to_nvector(self):
         return self
@@ -196,6 +205,11 @@ class Pvector(Position):
     def get_xyz(self, shape=(3,)):
         xyz = self.p_EB_E.ravel().reshape(shape)
         return xyz
+
+    x = property(get_x)
+    y = property(get_y)
+    z = property(get_z)
+    xyz = property(get_xyz)
 
     def to_nvector(self):
         (x, y, z), depth = nv.p_EB_E2n_EB_E(self.p_EB_E, a=NV_A, f=NV_F)
