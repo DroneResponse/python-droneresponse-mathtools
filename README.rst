@@ -32,10 +32,10 @@ Installation
 
     pip install git+ssh://git@github.com/DroneResponse/python-droneresponse-mathtools#egg=droneresponse-mathtools
 
-You migh see a harmless error: ``invalid command 'bdist_wheel'``.
+You might see a harmless error: ``invalid command 'bdist_wheel'``.
 
-Documentation
-=============
+Example
+=======
 
 
 To use the project:
