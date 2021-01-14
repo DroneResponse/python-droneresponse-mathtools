@@ -13,7 +13,7 @@ Overview
     * - package
       - | |commits-since|
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/DroneResponse/python-droneresponse-mathtools/v0.0.0.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/DroneResponse/python-droneresponse-mathtools/v0.1.0.svg
     :alt: Commits since latest release
     :target: https://github.com/DroneResponse/python-droneresponse-mathtools/compare/v0.0.0...main
 
