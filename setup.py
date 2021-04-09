@@ -73,7 +73,8 @@ setup(
     install_requires=[
         'numpy>=1.18',
         'nvector>=0.7',
-        # 'geographiclib>=1.50'
+        'PyGeodesy>=24.4.4',
+        'geographiclib>=1.50',
     ],
     extras_require={
         # eg:
