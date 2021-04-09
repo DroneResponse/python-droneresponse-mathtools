@@ -1,5 +1,6 @@
 import numpy as np
 import nvector as nv
+from pygeodesy.geoids import GeoidPGM
 
 __version__ = '0.1.1'
 
@@ -8,6 +9,8 @@ SEMI_MINOR = np.float64(6356752.31)
 
 NV_A = SEMI_MAJOR
 NV_F = 1 - (SEMI_MINOR / SEMI_MAJOR)
+
+_egm96 = GeoidPGM('/usr/share/GeographicLib/geoids/egm96-5.pgm', kind=-3)
 
 
 class Position(object):
@@ -232,3 +235,16 @@ def mean_position(positions):
     m_Z = np.mean(nvecs[-1, :])
 
     return positions[0].coerce(Nvector(n_EM_E[0], n_EM_E[1], n_EM_E[2], m_Z))
+
+
+def geoid_height(lat, lon):
+    """Calculates AMSL to ellipsoid conversion offset.
+    Uses EGM96 data with 5' grid and cubic interpolation.
+
+    The value returned can help you convert from meters above mean sea level (AMSL) to meters above
+    the WGS84 ellipsoid.
+
+    If you want to go from AMSL to ellipsoid height, add the value.
+    And to go from ellipsoid height to AMSL, subtract this value.
+    """
+    return _egm96.height(lat, lon)

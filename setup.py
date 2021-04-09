@@ -2,7 +2,6 @@
 # -*- encoding: utf-8 -*-
 
 import io
-import re
 from glob import glob
 from os.path import basename
 from os.path import dirname
@@ -25,11 +24,9 @@ setup(
     name='droneresponse-mathtools',
     version='0.1.1',
     license='MIT',
-    description='A collectio',
-    long_description='%s\n%s' % (
-        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
-        re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
-    ),
+    description='A collection of geodesy math tools for DroneResponse.',
+    long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     author='Michael Murphy',
     author_email='murphym18@gmail.com',
     url='https://github.com/DroneResponse/python-droneresponse-mathtools',
@@ -73,7 +70,7 @@ setup(
     install_requires=[
         'numpy>=1.18',
         'nvector>=0.7',
-        'PyGeodesy>=24.4.4',
+        'PyGeodesy>=21.4.4',
         'geographiclib>=1.50',
     ],
     extras_require={

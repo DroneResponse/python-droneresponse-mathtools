@@ -106,3 +106,47 @@ class TestDistance(unittest.TestCase):
         expected = 91.44
         actual = a.distance(b)
         self.assertAlmostEqual(expected, actual, delta=0.25)
+
+
+class TestGeoidHeight(unittest.TestCase):
+    def test_the_case_that_caused_us_to_need_this_function_in_the_first_place(self):
+        """
+        In simulation the drone was sent to the target position but when it got there, it reported a
+        position that was 47.2 meters too high. Here is the exact data:
+
+                          LATITUDE           LONGITUDE          ALTITUDE
+        current position: 47.3978429,        8.545869,          597.5515792976987
+        target position:  47.39784293752265, 8.545869057172045, 550.3417375283871
+
+        distance: 47.21 meters
+
+        The difference in altitude accounted for all the distance. This test checks this posiiton.
+        """
+        expected_height = 47.2206
+        actual_height = mathtools.geoid_height(47.3978429, 8.545869)
+        self.assertAlmostEqual(expected_height, actual_height, places=3)
+
+    def test_at_sim_landed_pos(self):
+        """
+        This test is noisy because the data was reported at different times.
+
+        At time 1
+        mavros/global_position/global reports:
+            latitude: 47.3977504
+            longitude: 8.5456074
+            altitude: 535.321900855022
+
+        At time 2
+        /birdy0/mavros/altitude reports:
+            monotonic: 487.572265625
+            amsl: 488.1198425292969
+            local: 0.01881488598883152
+            relative: -0.1408376693725586
+        """
+        amsl = 488.1198425292969
+        ellipsoid = 535.321900855022
+
+        expected_height = ellipsoid - amsl
+        actual_height = mathtools.geoid_height(47.3978429, 8.545869)
+
+        self.assertAlmostEqual(expected_height, actual_height, places=1)
