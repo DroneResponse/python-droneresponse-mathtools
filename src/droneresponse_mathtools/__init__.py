@@ -2,7 +2,7 @@ import numpy as np
 import nvector as nv
 from pygeodesy.geoids import GeoidPGM
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 SEMI_MAJOR = np.float64(6378137.0)
 SEMI_MINOR = np.float64(6356752.31)
