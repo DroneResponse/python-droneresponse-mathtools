@@ -180,9 +180,9 @@ class Nvector(Position):
         return Pvector(x, y, z)
 
     def to_lla(self):
-        lat, lon = nv.n_E2lat_lon(self.n_EB_E)
+        lat, lon = np.ravel(nv.n_E2lat_lon(self.n_EB_E))
 
-        return Lla(np.rad2deg(lat[0]), np.rad2deg(lon[0]), -self.depth)
+        return Lla(np.rad2deg(lat), np.rad2deg(lon), -self.depth)
 
     def _as_array(self):
         x, y, z = self.n_EB_E.ravel()
@@ -215,7 +215,13 @@ class Pvector(Position):
     xyz = property(get_xyz)
 
     def to_nvector(self):
-        (x, y, z), depth = nv.p_EB_E2n_EB_E(self.p_EB_E, a=NV_A, f=NV_F)
+        n_EB_E, depth = nv.p_EB_E2n_EB_E(self.p_EB_E, a=NV_A, f=NV_F)
+        n_EB_E = n_EB_E.ravel()
+        depth = depth[0]
+
+        x = n_EB_E[0]
+        y = n_EB_E[1]
+        z = n_EB_E[2]
 
         return Nvector(x, y, z, depth)
 

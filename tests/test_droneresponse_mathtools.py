@@ -1,6 +1,7 @@
 import unittest
 
 import numpy as np
+import pytest
 
 import droneresponse_mathtools as mathtools
 
@@ -39,6 +40,13 @@ class TestNVector(unittest.TestCase):
         self.assertEqual(depth, nvec.get_depth())
         self.assertEqual(depth, nvec.depth)
 
+    def test_nvector_to_lla2(self):
+        nvec = mathtools.Nvector(-0.42438554422796887, -0.667963499796372, 0.6113277948777666, -302.0)
+        lla = nvec.to_lla()
+        self.assertAlmostEqual(37.685573224035295, lla.lat, 1)
+        self.assertAlmostEqual(-122.42952655042922, lla.lon, 1)
+        self.assertAlmostEqual(302, lla.alt, 1)
+
 
 class TestPVector(unittest.TestCase):
     def test_getters(self):
@@ -55,6 +63,10 @@ class TestPVector(unittest.TestCase):
 
         self.assertEqual(z, pvec.get_z())
         self.assertEqual(z, pvec.z)
+
+    def test_to_lla_for_warnings(self):
+
+        pass
 
 
 class TestLLA(unittest.TestCase):
@@ -80,6 +92,43 @@ class TestLLA(unittest.TestCase):
 
         self.assertEqual(lat_rad, lla.get_latitude(as_rad=True))
         self.assertEqual(lon_rad, lla.get_longitude(as_rad=True))
+
+    def test_round_trip(self):
+        a = mathtools.Lla(41.71437875722079, -86.24183715080551, 220.7392)
+        b = a.move_ned(100, 100, 100)
+        n, e, d = b.distance_ned(a)
+
+        self.assertAlmostEqual(n, -100, 2)
+        self.assertAlmostEqual(e, -100, 2)
+        self.assertAlmostEqual(d, -100, 2)
+
+        a_actual = b.move_ned(-100, -100, -100)
+
+        actual_lat, actual_lon, actual_alt = a_actual.lla
+        a_lat, a_lon, a_alt = a.lla
+        self.assertAlmostEqual(actual_lat, a_lat, 1)
+        self.assertAlmostEqual(actual_lon, a_lon, 1)
+        self.assertAlmostEqual(actual_alt, a_alt, 1)
+
+    def test_north_moves_in_plus_lat_direction_northern_hemisphere(self):
+        a = mathtools.Lla(41.71437875722079, -86.24183715080551, 220.7392)
+        b = a.move_ned(100, 0, 0)
+        self.assertGreater(b.lat, a.lat)
+
+    def test_north_moves_in_plus_lat_direction_southern_hemisphere(self):
+        a = mathtools.Lla(-41.71437875722079, -86.24183715080551, 220.7392)
+        b = a.move_ned(100, 0, 0)
+        self.assertGreater(b.lat, a.lat)
+
+    def test_east_moves_in_plus_longitude_direction_northern_hemisphere(self):
+        a = mathtools.Lla(41.71437875722079, -86.24183715080551, 220.7392)
+        b = a.move_ned(0, 100, 0)
+        self.assertGreater(b.lon, a.lon)
+
+    def test_east_moves_in_plus_longitude_direction_southern_hemisphere(self):
+        a = mathtools.Lla(-41.71437875722079, -86.24183715080551, 220.7392)
+        b = a.move_ned(0, 100, 0)
+        self.assertGreater(b.lon, a.lon)
 
 
 class TestDistance(unittest.TestCase):
@@ -150,3 +199,23 @@ class TestGeoidHeight(unittest.TestCase):
         actual_height = mathtools.geoid_height(47.3978429, 8.545869)
 
         self.assertAlmostEqual(expected_height, actual_height, places=1)
+
+
+class TestWarnings(unittest.TestCase):
+    def test_there_is_no_warning_when_going_to_or_from_lla_pvec_and_nvec(self):
+        a = mathtools.Lla(41.71437875722079, -86.24183715080551, 220.7392)
+
+        # b = a.move_ned(100, 100, 100)
+        with pytest.warns(None) as record:
+            a.to_pvector().to_lla()
+            a.to_pvector().to_nvector()
+
+            a.to_nvector().to_lla()
+            a.to_nvector().to_pvector()
+
+            a.to_lla().to_nvector()
+            a.to_lla().to_pvector()
+
+        for x in record:
+            print(x)
+        self.assertEqual(len(record), 0)
