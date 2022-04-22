@@ -22,7 +22,7 @@ def read(*names, **kwargs):
 
 setup(
     name='droneresponse-mathtools',
-    version='0.2.1',
+    version='0.2.2',
     license='MIT',
     description='A collection of geodesy math tools for DroneResponse.',
     long_description=read('README.md'),
