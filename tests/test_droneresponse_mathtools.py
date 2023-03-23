@@ -1,4 +1,5 @@
 import unittest
+import warnings
 
 import numpy as np
 import pytest
@@ -206,7 +207,7 @@ class TestWarnings(unittest.TestCase):
         a = mathtools.Lla(41.71437875722079, -86.24183715080551, 220.7392)
 
         # b = a.move_ned(100, 100, 100)
-        with pytest.warns(None) as record:
+        with warnings.catch_warnings(record=True) as record:
             a.to_pvector().to_lla()
             a.to_pvector().to_nvector()
 
