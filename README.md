@@ -59,19 +59,6 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install --yes python3.6 python3.7 python3.9
 ```
 
-Install `flake8` and `pre-commit`
-
-```bash
-pip install pre-commit flake8
-```
-
-Set up `pre-commit`
-
-```bash
-cd python-droneresponse-mathtools
-pre-commit install
-```
-
 Set up `bumpversion`
 
 ```bash
