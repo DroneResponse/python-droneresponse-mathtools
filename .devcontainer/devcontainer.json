@@ -1,0 +1,13 @@
+{
+    "build": { "dockerfile": "../dockerfile" },
+  
+    "customizations": {
+      "vscode": {
+        "extensions": [
+            "ms-python.python",
+            "ms-python.isort",
+            "ms-python.pylint"
+        ]
+      }
+    }
+  }
