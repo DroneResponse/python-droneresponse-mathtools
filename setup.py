@@ -72,6 +72,7 @@ setup(
         'nvector==0.7.6',
         'PyGeodesy>=21.4.4',
         'geographiclib>=1.50',
+        'scipy==1.9.3',
     ],
     extras_require={
         # eg:
