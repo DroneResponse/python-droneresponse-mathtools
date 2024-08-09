@@ -37,7 +37,6 @@ To run all the tests run:
 tox
 ```
 
-
 Note, to combine the coverage data from all the tox environments run:
 
 ```bash
@@ -64,3 +63,23 @@ Set up `bumpversion`
 ```bash
 pip install bumpversion
 ```
+
+### How to package
+First you need to download the `egm96` data and save it to `src/droneresponse_mathtools/geoids/egm96-5.pgm`.
+
+This bash snippet will download the `egm96` data, and save it to the right spot using docker.
+```bash
+docker build --target geoid-downloader -t geoid-downloader-image .
+docker run -d --name temp_container geoid-downloader-image bash -c "while true; do sleep 1; done"
+docker cp  temp_container:/usr/share/GeographicLib/geoids ./src/droneresponse_mathtools/
+docker stop -t 1 temp_container
+docker rm temp_container
+```
+
+Once you have the `egm96` data you can create the `.whl` file
+
+```bash
+python setup.py bdist_wheel
+```
+
+Then you can access the file in `./dist`

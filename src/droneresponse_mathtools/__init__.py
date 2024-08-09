@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import nvector as nv
 from pygeodesy.geoids import GeoidPGM
@@ -10,7 +12,9 @@ SEMI_MINOR = np.float64(6356752.31)
 NV_A = SEMI_MAJOR
 NV_F = 1 - (SEMI_MINOR / SEMI_MAJOR)
 
-_egm96 = GeoidPGM('/usr/share/GeographicLib/geoids/egm96-5.pgm', kind=-3)
+
+_egm96_data_path = os.path.join(os.path.dirname(__file__), 'geoids', 'egm96-5.pgm')
+_egm96 = GeoidPGM(_egm96_data_path, kind=-3)
 
 
 class Position(object):
