@@ -12,8 +12,18 @@ SEMI_MINOR = np.float64(6356752.31)
 NV_A = SEMI_MAJOR
 NV_F = 1 - (SEMI_MINOR / SEMI_MAJOR)
 
+egm96_paths = [
+    os.path.join(os.path.dirname(__file__), 'geoids', 'egm96-5.pgm'),
+    '/usr/share/GeographicLib/geoids/egm96-5.pgm',
+]
+# Find the first path that exists
+_egm96_data_path = None
+for path in egm96_paths:
+    if os.path.exists(path):
+        _egm96_data_path = path
+        break
 
-_egm96_data_path = os.path.join(os.path.dirname(__file__), 'geoids', 'egm96-5.pgm')
+print(f"Loading EGM96 data from: '{_egm96_data_path}'")
 _egm96 = GeoidPGM(_egm96_data_path, kind=-3)
 
 
