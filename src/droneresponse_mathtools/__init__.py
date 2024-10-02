@@ -15,6 +15,7 @@ NV_F = 1 - (SEMI_MINOR / SEMI_MAJOR)
 egm96_paths = [
     os.path.join(os.path.dirname(__file__), 'geoids', 'egm96-5.pgm'),
     '/usr/share/GeographicLib/geoids/egm96-5.pgm',
+    '/usr/local/share/GeographicLib/geoids/egm96-5.pgm',
 ]
 # Find the first path that exists
 _egm96_data_path = None
